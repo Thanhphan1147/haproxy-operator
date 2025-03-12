@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          python3 - <<'____HERE' > ${{ github.workspwce }}/haproxy_route_requirer_src.json
+          python3 - <<'____HERE' > /tmp/haproxy_route_requirer_src.json
           import json
           import pathlib
           json.dumps(
@@ -25,4 +25,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: haproxy_route_requirer_src
-          path: ${{ github.workspwce }}/haproxy_route_requirer_src.json
+          path: /tmp/haproxy_route_requirer_src.json
