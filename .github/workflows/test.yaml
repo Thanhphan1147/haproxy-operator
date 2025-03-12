@@ -8,15 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          echo $GITHUB_WORKSPACE
           python3 - <<'____HERE' > /tmp/haproxy_route_requirer_src.json
           import json
           import pathlib
           json.dumps(
             {
-              "any_charm.py": pathlib.Path("tests/integration/haproxy_route_requirer.py").read_text(
+              "any_charm.py": pathlib.Path("$GITHUB_WORKSPACE/tests/integration/haproxy_route_requirer.py").read_text(
                 encoding="utf-8"
               ),
-              "haproxy_route.py": pathlib.Path("lib/charms/haproxy/v0/haproxy_route.py").read_text(
+              "haproxy_route.py": pathlib.Path("$GITHUB_WORKSPACE/lib/charms/haproxy/v0/haproxy_route.py").read_text(
                 encoding="utf-8"
               ),
             }
