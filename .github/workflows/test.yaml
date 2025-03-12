@@ -5,7 +5,7 @@ on:
 
 jobs:
   generate-anycharm-json-artifact:
-    runs-on: ubuntu@latest
+    runs-on: ubuntu-latest
     steps:
       - run: pwd
       - run: ls "${GITHUB_WORKSPACE}"
