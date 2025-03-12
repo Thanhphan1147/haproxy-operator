@@ -1,13 +1,26 @@
 name: Tests
 
 on:
-  pull_request:
+  workflow_dispatch:
 
 jobs:
-  unit-tests:
-    uses: canonical/operator-workflows/.github/workflows/test.yaml@main
-    secrets: inherit
-    with:
-      self-hosted-runner: true
-      self-hosted-runner-image: "noble"
-      charmcraft-channel: latest/edge
+  generate-anycharm-json-artifact:
+    runs-on: ubuntu@latest
+    steps:
+      - run: pwd
+      - run: ls "${GITHUB_WORKSPACE}"
+      - run: |
+          python3 - <<'____HERE' > haproxy_route_requirer_src.json
+          import json
+          import pathlib
+          json.dumps(
+            {
+              "any_charm.py": pathlib.Path(${GITHUB_WORKSPACE}).read_text(
+                encoding="utf-8"
+              ),
+              "haproxy_route.py": pathlib.Path(${GITHUB_WORKSPACE}).read_text(
+                encoding="utf-8"
+              ),
+            }
+          )
+          ____HERE
