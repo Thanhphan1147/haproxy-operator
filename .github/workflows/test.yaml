@@ -7,20 +7,22 @@ jobs:
   generate-anycharm-json-artifact:
     runs-on: ubuntu-latest
     steps:
-      - run: pwd
-      - run: ls "${GITHUB_WORKSPACE}"
       - run: |
-          python3 - <<'____HERE' > haproxy_route_requirer_src.json
+          python3 - <<'____HERE' > ${{ github.workspwce }}/haproxy_route_requirer_src.json
           import json
           import pathlib
           json.dumps(
             {
-              "any_charm.py": pathlib.Path(${GITHUB_WORKSPACE}).read_text(
+              "any_charm.py": pathlib.Path("tests/integration/haproxy_route_requirer.py").read_text(
                 encoding="utf-8"
               ),
-              "haproxy_route.py": pathlib.Path(${GITHUB_WORKSPACE}).read_text(
+              "haproxy_route.py": pathlib.Path("lib/charms/haproxy/v0/haproxy_route.py").read_text(
                 encoding="utf-8"
               ),
             }
           )
           ____HERE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: haproxy_route_requirer_src
+          path: ${{ github.workspwce }}/haproxy_route_requirer_src.json
