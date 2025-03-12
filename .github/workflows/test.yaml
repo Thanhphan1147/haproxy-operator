@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
+          pwd
+          ls -la
           echo $GITHUB_WORKSPACE
           python3 - <<'____HERE' > /tmp/haproxy_route_requirer_src.json
           import json
