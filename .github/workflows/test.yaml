@@ -7,6 +7,7 @@ jobs:
   generate-anycharm-json-artifact:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: |
           pwd
           ls -la
