@@ -18,7 +18,7 @@ jobs:
           import os
 
           workspace = os.environ["GITHUB_WORKSPACE"]
-          json.dumps(
+          print(json.dumps(
             {
               "any_charm.py": pathlib.Path(f"{workspace}/tests/integration/haproxy_route_requirer.py").read_text(
                 encoding="utf-8"
@@ -27,7 +27,7 @@ jobs:
                 encoding="utf-8"
               ),
             }
-          )
+          ))
           ____HERE
       - uses: actions/upload-artifact@v4
         with:
